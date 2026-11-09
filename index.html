@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AIアプリづくりの指示文 | iroiroai</title>
+<meta name="description" content="Claudeのプロジェクトの指示にコピペするだけで、授業で使えるアプリが作りやすくなる指示文を配布しています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1f2a37;
+    --sub: #52606d;
+    --line: #d5dbe3;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --accent: #1d5fd1;
+    --accent-dark: #174aa3;
+    --ok: #1b7a43;
+    --warn-bg: #fff6df;
+    --warn-line: #e6c36a;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.75;
+    font-size: 17px;
+  }
+  header {
+    background: var(--accent);
+    color: #fff;
+    padding: 36px 20px 40px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  header h1 { margin: 0 0 10px; font-size: clamp(24px, 5vw, 34px); line-height: 1.35; }
+  header p { margin: 0; font-size: 18px; opacity: .95; }
+  main { padding: 28px 20px 60px; }
+  h2 {
+    font-size: 22px;
+    margin: 40px 0 14px;
+    padding-left: 12px;
+    border-left: 6px solid var(--accent);
+    line-height: 1.4;
+  }
+  h2:first-child { margin-top: 0; }
+
+  /* 使い方 */
+  ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 12px; }
+  ol.steps li {
+    counter-increment: s;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px 14px 62px;
+    position: relative;
+  }
+  ol.steps li::before {
+    content: counter(s);
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  ol.steps b { display: block; font-size: 18px; }
+  ol.steps span { color: var(--sub); font-size: 15px; }
+
+  .note {
+    margin-top: 14px;
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-line);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+
+  /* カード */
+  #list { display: grid; gap: 18px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  .card h3 { margin: 0 0 4px; font-size: 21px; line-height: 1.4; }
+  .badge {
+    display: inline-block;
+    font-size: 13px; font-weight: 700;
+    color: var(--accent-dark);
+    background: #e6eefc;
+    border-radius: 999px;
+    padding: 1px 10px;
+    margin-bottom: 6px;
+  }
+  .card p.desc { margin: 4px 0 14px; color: var(--sub); }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  button {
+    font: inherit;
+    min-height: 48px;
+    min-width: 48px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+    background: #fff;
+    color: var(--accent);
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  button.primary { background: var(--accent); color: #fff; }
+  button.primary:hover { background: var(--accent-dark); }
+  button:hover { background: #eef3fd; }
+  button.primary:hover { background: var(--accent-dark); }
+  button:focus-visible, summary:focus-visible { outline: 3px solid #f0a500; outline-offset: 2px; }
+  button.done { background: var(--ok); border-color: var(--ok); color: #fff; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .meta { margin-top: 10px; font-size: 14px; color: var(--sub); }
+  details { margin-top: 14px; }
+  summary { cursor: pointer; font-weight: 700; color: var(--accent); min-height: 44px; display: flex; align-items: center; }
+  pre {
+    margin: 8px 0 0;
+    max-height: 420px;
+    overflow: auto;
+    background: #f3f5f8;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: "BIZ UDPGothic", Meiryo, monospace;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .soon { background: #fafafa; }
+  .soon .badge { background: #eceff3; color: var(--sub); }
+
+  .faq dt { font-weight: 700; margin-top: 16px; }
+  .faq dd { margin: 4px 0 0; color: var(--sub); }
+
+  footer { text-align: center; color: var(--sub); font-size: 14px; padding: 0 20px 40px; }
+  footer a { color: var(--accent); }
+  #status { position: absolute; left: -9999px; }
+  .error { color: #b3261e; font-weight: 700; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>自分でもつくれる！<br>AIアプリづくりの指示文</h1>
+    <p>この文章をClaudeの「プロジェクトの指示」にコピペするだけ。授業で使えるアプリが、ぐっとつくりやすくなります。</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <h2>つかい方（3ステップ）</h2>
+    <ol class="steps">
+      <li><b>下から指示文をコピーする</b><span>つくりたいアプリに合うカードの「コピーする」ボタンを押します。</span></li>
+      <li><b>Claudeでプロジェクトをつくり、指示に貼りつける</b><span>Claudeで新しいプロジェクトを作成し、「プロジェクトの指示」欄に貼りつけて保存します。</span></li>
+      <li><b>プロジェクトの中でチャットして、アプリをつくる</b><span>「こんなアプリがほしい」と普通の言葉で伝えるだけ。指示文のおかげで、ねらいに合ったアプリが作られやすくなります。</span></li>
+    </ol>
+    <div class="note">うまくいかないときは、指示文はそのままにして、チャットで「ここを直して」と具体的に伝えてみてください。</div>
+
+    <h2>指示文をえらぶ</h2>
+    <div id="list" aria-live="polite"><p>読みこみ中…</p></div>
+    <div id="status" role="status" aria-live="polite"></div>
+
+    <h2>よくある質問</h2>
+    <dl class="faq">
+      <dt>指示文は書きかえてもいいですか？</dt>
+      <dd>はい。自分のクラスや目的に合わせて、自由に書きかえて使ってください。</dd>
+      <dt>ダウンロードしたほうがいいですか？</dt>
+      <dd>コピーして貼りつけるだけで使えます。あとで見返したいときは「ダウンロード」でテキストファイルとして保存できます。</dd>
+    </dl>
+  </div>
+</main>
+
+<footer>
+  <p>つくったアプリは <a href="https://sorafjah.github.io/" target="_blank" rel="noopener">sorafjah.github.io</a> にもあります。</p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var MANIFEST = "texts/index.json";
+  var PLACEHOLDER_MARK = "【準備中】";
+  var listEl = document.getElementById("list");
+  var statusEl = document.getElementById("status");
+
+  function announce(msg) { statusEl.textContent = ""; setTimeout(function () { statusEl.textContent = msg; }, 30); }
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).catch(function () { return fallbackCopy(text); });
+    }
+    return fallbackCopy(text);
+  }
+  function fallbackCopy(text) {
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed"; ta.style.opacity = "0"; ta.style.top = "0";
+      document.body.appendChild(ta);
+      ta.select(); ta.setSelectionRange(0, text.length);
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error("copy failed"));
+    });
+  }
+
+  function download(filename, text) {
+    var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function flash(btn, doneLabel) {
+    var orig = btn.textContent;
+    btn.textContent = doneLabel;
+    btn.classList.add("done");
+    setTimeout(function () { btn.textContent = orig; btn.classList.remove("done"); }, 2000);
+  }
+
+  function buildCard(item, text) {
+    var ready = text != null && text.trim() !== "" && text.indexOf(PLACEHOLDER_MARK) !== 0;
+    var card = el("article", "card" + (ready ? "" : " soon"));
+    if (item.badge) card.appendChild(el("span", "badge", item.badge));
+    card.appendChild(el("h3", null, item.title));
+    if (item.desc) card.appendChild(el("p", "desc", item.desc));
+
+    var actions = el("div", "actions");
+    var copyBtn = el("button", "primary", ready ? "コピーする" : "じゅんび中");
+    copyBtn.type = "button";
+    var dlBtn = el("button", null, "ダウンロード");
+    dlBtn.type = "button";
+    if (!ready) { copyBtn.disabled = true; dlBtn.disabled = true; }
+    else {
+      copyBtn.addEventListener("click", function () {
+        copyText(text).then(function () {
+          flash(copyBtn, "コピーしました ✓");
+          announce(item.title + "の指示文をコピーしました");
+        }).catch(function () {
+          alert("コピーできませんでした。「全文を見る」から文章を選んでコピーしてください。");
+        });
+      });
+      dlBtn.addEventListener("click", function () {
+        download(item.file.replace(/^.*\//, ""), text);
+        announce(item.title + "の指示文をダウンロードしました");
+      });
+    }
+    actions.appendChild(copyBtn);
+    actions.appendChild(dlBtn);
+    card.appendChild(actions);
+
+    if (ready) {
+      card.appendChild(el("div", "meta", text.length.toLocaleString("ja-JP") + "文字"));
+      var d = el("details");
+      d.appendChild(el("summary", null, "全文を見る"));
+      d.appendChild(el("pre", null, text));
+      card.appendChild(d);
+    } else {
+      card.appendChild(el("div", "meta", "もうすぐ公開します。"));
+    }
+    return card;
+  }
+
+  function fetchText(path) {
+    return fetch(path, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) throw new Error(path + " " + r.status);
+      return r.text();
+    });
+  }
+
+  fetchText(MANIFEST).then(function (raw) {
+    var items = JSON.parse(raw).items || [];
+    return Promise.all(items.map(function (it) {
+      return fetchText(it.file).then(function (t) { return { item: it, text: t }; },
+                                     function () { return { item: it, text: null }; });
+    }));
+  }).then(function (results) {
+    listEl.textContent = "";
+    results.forEach(function (r) { listEl.appendChild(buildCard(r.item, r.text)); });
+  }).catch(function (e) {
+    listEl.textContent = "";
+    listEl.appendChild(el("p", "error", "指示文を読みこめませんでした。ページを再読みこみしてください。"));
+    if (window.console) console.error(e);
+  });
+})();
+</script>
+</body>
+</html>

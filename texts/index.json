@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "title": "3Dアプリ",
+      "badge": "3D",
+      "desc": "ブラウザで動く3Dのゲームや教材アプリをつくるための指示文です。",
+      "file": "texts/3d-app.txt"
+    },
+    {
+      "title": "アプリ作成",
+      "badge": "基本",
+      "desc": "授業で使う1枚のHTMLアプリをつくるための、基本の指示文です。",
+      "file": "texts/app-basic.txt"
+    },
+    {
+      "title": "みんなで",
+      "badge": "アプリ作成",
+      "desc": "電子黒板やプロジェクターに映して、みんなで使うアプリ向けの指示文です。",
+      "file": "texts/minna-de.txt"
+    },
+    {
+      "title": "ひとりずつ",
+      "badge": "アプリ作成",
+      "desc": "タブレットなどで、ひとりずつ操作して使うアプリ向けの指示文です。",
+      "file": "texts/hitori-zutsu.txt"
+    },
+    {
+      "title": "アプリの指示",
+      "badge": "アプリ作成",
+      "desc": "つくりたいアプリを、Claudeに上手に伝えるための指示文です。",
+      "file": "texts/app-shiji.txt"
+    }
+  ]
+}
