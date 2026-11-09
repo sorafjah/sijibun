@@ -1,34 +1,22 @@
 {
   "items": [
     {
-      "title": "3Dアプリ",
-      "badge": "3D",
-      "desc": "ブラウザで動く3Dのゲームや教材アプリをつくるための指示文です。",
-      "file": "texts/3d-app.txt"
-    },
-    {
       "title": "アプリ作成",
       "badge": "基本",
-      "desc": "授業で使う1枚のHTMLアプリをつくるための、基本の指示文です。",
+      "desc": "教室で使う1ファイルのHTMLアプリ（ドリル・ゲーム・シミュレーター・印刷プリント）をつくるための指示文です。iPadで使うことを前提にしています。",
       "file": "texts/app-basic.txt"
     },
     {
-      "title": "みんなで",
-      "badge": "アプリ作成",
-      "desc": "電子黒板やプロジェクターに映して、みんなで使うアプリ向けの指示文です。",
-      "file": "texts/minna-de.txt"
+      "title": "3Dアプリ",
+      "badge": "3D",
+      "desc": "iPadのSafariで動く3Dゲームを、Three.jsで1つのHTMLファイルにつくるための仕様です。",
+      "file": "texts/3d-app.txt"
     },
     {
-      "title": "ひとりずつ",
-      "badge": "アプリ作成",
-      "desc": "タブレットなどで、ひとりずつ操作して使うアプリ向けの指示文です。",
-      "file": "texts/hitori-zutsu.txt"
-    },
-    {
-      "title": "アプリの指示",
-      "badge": "アプリ作成",
-      "desc": "つくりたいアプリを、Claudeに上手に伝えるための指示文です。",
-      "file": "texts/app-shiji.txt"
+      "title": "みんなで／ひとりずつ アプリ",
+      "badge": "GAS",
+      "desc": "Google Apps Script＋スプレッドシートで、先生の画面と生徒の画面があるクイズ・ドリルをつくる指示文です。「みんなで」「ひとりずつ」の2つの進め方を選べます。",
+      "file": "texts/minna-hitori.txt"
     }
   ]
 }
