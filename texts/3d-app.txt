@@ -11,10 +11,10 @@ iPad（Safari）での授業使用を前提に、単一HTMLファイルで完結
 授業中に画面が拡大されたりスクロールしたりすると、生徒が自力で元に戻せず活動が止まってしまいます。そのため、次の対策は**すべてのゲームで必ず入れます**。
  
 - ダブルタップによるズーム・拡大を防止する
- - `<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">`
- - body全体に `touch-action: manipulation`
- - `gesturestart` イベントを `preventDefault()` で無効化
- - 300ms以内の連続タップは `touchend` 側で判定してブロック
+  - `<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">`
+  - body全体に `touch-action: manipulation`
+  - `gesturestart` イベントを `preventDefault()` で無効化
+  - 300ms以内の連続タップは `touchend` 側で判定してブロック
 - ピンチズーム・スクロールバウンスは `overflow: hidden` と `touchmove` の `preventDefault()` で防止
 - タッチ操作するUI（ボタン・コントローラー類）は最低44px四方を確保する
 - 120Hz ProMotion対応：delta-time を 1/30秒でクランプし、dtScale方式で動かす（リフレッシュレートが違っても速度が変わらないようにするため）
@@ -25,25 +25,25 @@ iPad（Safari）での授業使用を前提に、単一HTMLファイルで完結
  
 - HTML / CSS / JS をすべて1ファイルにまとめる（GitHub Pagesにそのまま置けるようにするため）
 - ライブラリは `cdn.jsdelivr.net` から importmap で読み込み、**バージョンは下記に固定する**
- - 理由：実装のたびに版が変わると、過去作品との互換性や挙動の再現性が失われるため
- - Three.js：`three@0.169.0`（アドオンも同じ版）
- - cannon-es：`cannon-es@0.20.0`（物理演算が必要なときだけ読み込む）
+  - 理由：実装のたびに版が変わると、過去作品との互換性や挙動の再現性が失われるため
+  - Three.js：`three@0.169.0`（アドオンも同じ版）
+  - cannon-es：`cannon-es@0.20.0`（物理演算が必要なときだけ読み込む）
  
 ```html
 <script type="importmap">
 {
- "imports": {
-   "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
-   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/",
-   "cannon-es": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"
- }
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/",
+    "cannon-es": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"
+  }
 }
 </script>
 ```
  
 - 画像・音声などの外部素材ファイルは使わない
- - テクスチャは Canvas 2D API で生成する
- - 音は Web Audio API で合成する。iPad Safari では最初のタップ時に `AudioContext.resume()` を呼ぶ
+  - テクスチャは Canvas 2D API で生成する
+  - 音は Web Audio API で合成する。iPad Safari では最初のタップ時に `AudioContext.resume()` を呼ぶ
 - フォントは BIZ UDPGothic を Google Fonts から読み込む
 - localStorage などのブラウザストレージは使わない
  
@@ -70,8 +70,8 @@ iPad（Safari）での授業使用を前提に、単一HTMLファイルで完結
 自動テストで動作を確かめられるように、すべてのゲームで次を用意します。
  
 - `window.__game`（または `window.__G`）にゲーム状態への参照を持たせる
- - state、エンティティ配列、カメラ参照
- - `api` オブジェクト：固定ステップで進める `tick(n, dt)`、状態の取得、操作入力を外から行うメソッド群
+  - state、エンティティ配列、カメラ参照
+  - `api` オブジェクト：固定ステップで進める `tick(n, dt)`、状態の取得、操作入力を外から行うメソッド群
 - ゲームループ内で更新される値（`frames`、`elapsed` など）を含め、フレーム数をポーリングして待てるようにする
 - エンティティを `.position` ではなく内部データ（例：`c.t` や lane パラメータ）で動かしている場合は、その旨をフック内のコメントに明記する
  
@@ -82,11 +82,11 @@ iPad（Safari）での授業使用を前提に、単一HTMLファイルで完結
 生徒が一人でも遊び始められるよう、説明画面を必ず付けます。
  
 - ゲーム開始時に毎回、遊び方の説明画面を表示する
- - 操作方法は文章だけでなく、図やアイコンでも示す
- - 漢字にはふりがなを付ける
- - 「はじめる」ボタン（44px以上）で説明を閉じてゲームを開始する。このタイミングで `AudioContext.resume()` も呼ぶ
+  - 操作方法は文章だけでなく、図やアイコンでも示す
+  - 漢字にはふりがなを付ける
+  - 「はじめる」ボタン（44px以上）で説明を閉じてゲームを開始する。このタイミングで `AudioContext.resume()` も呼ぶ
 - 画面の隅に常に「？」ボタンを置き、ゲーム中でも説明を再表示できるようにする
- - 説明を表示している間はゲームを一時停止する
+  - 説明を表示している間はゲームを一時停止する
  
 ---
  
@@ -103,12 +103,12 @@ iPad Safari はキャッシュが強く、更新後も古い版が表示され�
 ```
  
 - Safari はこれだけでは効かないことが多いため、次も併用する
- - body 内に更新日時のコメントを入れる（例：`<!-- build: 2026-09-29 -->`）
- - 画面の隅に小さくバージョン表記を出す（例：`v2026-09-29`）。生徒のiPadで正しい版か目視確認するため
- - 外部ファイルを読み込む場合は、末尾にバージョンクエリを付ける（例：`game.js?v=20260929`）
+  - body 内に更新日時のコメントを入れる（例：`<!-- build: 2026-09-29 -->`）
+  - 画面の隅に小さくバージョン表記を出す（例：`v2026-09-29`）。生徒のiPadで正しい版か目視確認するため
+  - 外部ファイルを読み込む場合は、末尾にバージョンクエリを付ける（例：`game.js?v=20260929`）
 - 運用メモ（人間向け）
- - 反映されないときは、iPad の「設定 → Safari → 履歴とWebサイトデータを消去」が必要なことがある。更新後は生徒にキャッシュクリアの声かけをする
- - GitHub Pages の反映には数十秒〜数分かかるので、コミット直後は少し待ってから開く
+  - 反映されないときは、iPad の「設定 → Safari → 履歴とWebサイトデータを消去」が必要なことがある。更新後は生徒にキャッシュクリアの声かけをする
+  - GitHub Pages の反映には数十秒〜数分かかるので、コミット直後は少し待ってから開く
  
 ---
  
@@ -140,8 +140,8 @@ Fable は使わない。3Dアプリの実装は **Opus 5.5** を基本とし、�
  
 1. このプロジェクトで仕様を相談して固める
 2. 同じ会話でそのまま実装する
-  - 会話が長くなったら「ここまでの仕様と現状をまとめて」と頼み、そのまとめと最新HTMLを新しい会話に渡して続ける
+   - 会話が長くなったら「ここまでの仕様と現状をまとめて」と頼み、そのまとめと最新HTMLを新しい会話に渡して続ける
 3. テスト：Playwright（SwiftShaderレンダリング、実時間の約1/6速度）
-  - 会話の中でClaudeに動作確認まで頼むこともできる（環境によってはブラウザを用意できず、できない場合もある）
+   - 会話の中でClaudeに動作確認まで頼むこともできる（環境によってはブラウザを用意できず、できない場合もある）
 4. GitHub Pages（sorafjah.github.io）に公開
 5. Notion（iroiroai）に登録してカタログ化

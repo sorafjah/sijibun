@@ -11,12 +11,6 @@
       "badge": "3D",
       "desc": "iPadのSafariで動く3Dゲームを、Three.jsで1つのHTMLファイルにつくるための仕様です。",
       "file": "texts/3d-app.txt"
-    },
-    {
-      "title": "みんなで／ひとりずつ アプリ",
-      "badge": "GAS",
-      "desc": "Google Apps Script＋スプレッドシートで、先生の画面と生徒の画面があるクイズ・ドリルをつくる指示文です。「みんなで」「ひとりずつ」の2つの進め方を選べます。",
-      "file": "texts/minna-hitori.txt"
     }
   ]
 }

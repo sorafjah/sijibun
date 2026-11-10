@@ -4,29 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AIアプリづくりの指示文 | iroiroai</title>
-<meta name="description" content="Claudeのプロジェクトの指示にコピペするだけで、授業で使えるアプリが作りやすくなる指示文を配布しています。">
+<meta name="description" content="Claudeのプロジェクトの指示、またはチャットのプロンプトに貼るだけで、授業で使えるアプリが作りやすくなる指示文を配布しています。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #1f2a37;
-    --sub: #52606d;
-    --line: #d5dbe3;
-    --bg: #f5f7fa;
-    --card: #ffffff;
-    --accent: #1d5fd1;
-    --accent-dark: #174aa3;
+    --bg: #f7f5f0;
+    --card: #fff;
+    --accent: #2d6a4f;
+    --accent-dark: #22523d;
+    --text: #1a1a1a;
+    --muted: #666;
+    --border: #e0dcd4;
+    --tag-bg: #e8f4ee;
+    --tag-text: #2d6a4f;
+    --tool-bg: #fff3e0;
+    --tool-text: #b45309;
     --ok: #1b7a43;
-    --warn-bg: #fff6df;
-    --warn-line: #e6c36a;
+    --radius: 10px;
+    --shadow: 0 2px 8px rgba(0,0,0,0.07);
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0;
-    font-family: "BIZ UDPGothic", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
-    color: var(--ink);
+    font-family: "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    color: var(--text);
     background: var(--bg);
     line-height: 1.75;
     font-size: 17px;
@@ -34,17 +38,19 @@
   header {
     background: var(--accent);
     color: #fff;
-    padding: 36px 20px 40px;
+    padding: 34px 20px 38px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.18);
   }
   .wrap { max-width: 860px; margin: 0 auto; }
   header h1 { margin: 0 0 10px; font-size: clamp(24px, 5vw, 34px); line-height: 1.35; }
-  header p { margin: 0; font-size: 18px; opacity: .95; }
+  header p { margin: 0; font-size: 18px; opacity: .92; }
   main { padding: 28px 20px 60px; }
   h2 {
-    font-size: 22px;
+    font-size: 21px;
     margin: 40px 0 14px;
-    padding-left: 12px;
-    border-left: 6px solid var(--accent);
+    padding-bottom: 7px;
+    border-bottom: 2px solid var(--accent);
+    color: var(--accent);
     line-height: 1.4;
   }
   h2:first-child { margin-top: 0; }
@@ -54,8 +60,9 @@
   ol.steps li {
     counter-increment: s;
     background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
     padding: 14px 16px 14px 62px;
     position: relative;
   }
@@ -67,13 +74,14 @@
     display: flex; align-items: center; justify-content: center; font-size: 18px;
   }
   ol.steps b { display: block; font-size: 18px; }
-  ol.steps span { color: var(--sub); font-size: 15px; }
+  ol.steps span { color: var(--muted); font-size: 15px; }
 
   .note {
     margin-top: 14px;
-    background: var(--warn-bg);
-    border: 1px solid var(--warn-line);
-    border-radius: 10px;
+    background: var(--tool-bg);
+    border: 1px solid #f0c98a;
+    color: #5b3a06;
+    border-radius: var(--radius);
     padding: 12px 16px;
     font-size: 15px;
   }
@@ -82,29 +90,54 @@
   #list { display: grid; gap: 18px; }
   .card {
     background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
     padding: 20px;
-    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    box-shadow: var(--shadow);
   }
   .card h3 { margin: 0 0 4px; font-size: 21px; line-height: 1.4; }
   .badge {
     display: inline-block;
     font-size: 13px; font-weight: 700;
-    color: var(--accent-dark);
-    background: #e6eefc;
+    color: var(--tag-text);
+    background: var(--tag-bg);
     border-radius: 999px;
     padding: 1px 10px;
     margin-bottom: 6px;
   }
-  .card p.desc { margin: 4px 0 14px; color: var(--sub); }
-  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .card p.desc { margin: 4px 0 12px; color: var(--muted); }
+
+  /* 文章のプレビュー（数行だけ見せて、全文はひらく） */
+  pre.text {
+    margin: 0;
+    background: #faf9f6;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: "BIZ UDPGothic", Meiryo, monospace;
+    font-size: 15px;
+    line-height: 1.7;
+    max-height: 8.6em;       /* 5行ぶんくらい */
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(#000 60%, transparent);
+            mask-image: linear-gradient(#000 60%, transparent);
+  }
+  pre.text.open {
+    max-height: 480px;
+    overflow: auto;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
   button {
     font: inherit;
     min-height: 48px;
     min-width: 48px;
     padding: 8px 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 2px solid var(--accent);
     background: #fff;
     color: var(--accent);
@@ -112,47 +145,30 @@
     cursor: pointer;
     touch-action: manipulation;
   }
+  button:hover { background: var(--tag-bg); }
   button.primary { background: var(--accent); color: #fff; }
   button.primary:hover { background: var(--accent-dark); }
-  button:hover { background: #eef3fd; }
-  button.primary:hover { background: var(--accent-dark); }
-  button:focus-visible, summary:focus-visible { outline: 3px solid #f0a500; outline-offset: 2px; }
+  button:focus-visible { outline: 3px solid #e8a020; outline-offset: 2px; }
   button.done { background: var(--ok); border-color: var(--ok); color: #fff; }
   button:disabled { opacity: .45; cursor: not-allowed; }
-  .meta { margin-top: 10px; font-size: 14px; color: var(--sub); }
-  details { margin-top: 14px; }
-  summary { cursor: pointer; font-weight: 700; color: var(--accent); min-height: 44px; display: flex; align-items: center; }
-  pre {
-    margin: 8px 0 0;
-    max-height: 420px;
-    overflow: auto;
-    background: #f3f5f8;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 14px;
-    white-space: pre-wrap;
-    word-break: break-word;
-    font-family: "BIZ UDPGothic", Meiryo, monospace;
-    font-size: 15px;
-    line-height: 1.7;
-  }
-  .soon { background: #fafafa; }
-  .soon .badge { background: #eceff3; color: var(--sub); }
+  .meta { margin-top: 10px; font-size: 14px; color: var(--muted); }
+  .soon { background: #fcfbf8; }
+  .soon .badge { background: #eeece6; color: var(--muted); }
 
   .faq dt { font-weight: 700; margin-top: 16px; }
-  .faq dd { margin: 4px 0 0; color: var(--sub); }
+  .faq dd { margin: 4px 0 0; color: var(--muted); }
 
-  footer { text-align: center; color: var(--sub); font-size: 14px; padding: 0 20px 40px; }
-  footer a { color: var(--accent); }
+  footer { text-align: center; color: var(--muted); font-size: 14px; padding: 16px 20px 40px; border-top: 1px solid var(--border); }
+  footer a { color: var(--accent); word-break: break-all; }
   #status { position: absolute; left: -9999px; }
-  .error { color: #b3261e; font-weight: 700; }
+  .error { color: #c0392b; font-weight: 700; }
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
     <h1>自分でもつくれる！<br>AIアプリづくりの指示文</h1>
-    <p>この文章をClaudeの「プロジェクトの指示」にコピペするだけ。授業で使えるアプリが、ぐっとつくりやすくなります。</p>
+    <p>この文章をClaudeの「プロジェクトの指示」に入れるか、チャットのプロンプトとして貼るだけ。授業で使えるアプリが、ぐっとつくりやすくなります。</p>
   </div>
 </header>
 
@@ -161,9 +177,9 @@
 
     <h2>つかい方（3ステップ）</h2>
     <ol class="steps">
-      <li><b>下から指示文をコピーする</b><span>つくりたいアプリに合うカードの「コピーする」ボタンを押します。</span></li>
-      <li><b>Claudeでプロジェクトをつくり、指示に貼りつける</b><span>Claudeで新しいプロジェクトを作成し、「プロジェクトの指示」欄に貼りつけて保存します。プロジェクトを使わず、チャットの最初のメッセージに貼りつけても使えます。</span></li>
-      <li><b>プロジェクトの中でチャットして、アプリをつくる</b><span>「こんなアプリがほしい」と普通の言葉で伝えるだけ。指示文のおかげで、ねらいに合ったアプリが作られやすくなります。</span></li>
+      <li><b>下から指示文をコピーする</b><span>つくりたいアプリに合うカードの「コピーする」ボタンを押します。数行だけ見えているので、「全文を見る」で中身も確かめられます。</span></li>
+      <li><b>Claudeに貼りつける</b><span>Claudeのプロジェクトの「指示」欄に貼って保存します。プロジェクトを使わないときは、新しいチャットの最初のメッセージ（プロンプト）として貼ります。</span></li>
+      <li><b>つくりたいアプリを伝える</b><span>「こんなアプリがほしい」と普通の言葉で伝えるだけ。指示文のおかげで、ねらいに合ったアプリが作られやすくなります。</span></li>
     </ol>
     <div class="note">うまくいかないときは、指示文はそのままにして、チャットで「ここを直して」と具体的に伝えてみてください。</div>
 
@@ -173,20 +189,18 @@
 
     <h2>よくある質問</h2>
     <dl class="faq">
-      <dt>チャットに貼っても使えますか？</dt>
-      <dd>使えます。新しいチャットの最初のメッセージとして貼りつけてから、つくりたいアプリを伝えてください。ちがいは2つです。①その会話の中だけで効きます（プロジェクトの指示に入れると、そのプロジェクトのどのチャットでも自動で効きます）。②会話が長くなると、最初に貼った内容が守られにくくなることがあります。そのときは貼りなおしてください。</dd>
+      <dt>プロジェクトの指示と、チャットに貼るのと、どちらがいいですか？</dt>
+      <dd>どちらでも使えます。プロジェクトの指示に入れると、そのプロジェクトのどのチャットでも自動で効きます。チャットに貼る場合は、その会話の中だけで効きます。会話が長くなって指示が守られにくくなったときは、貼りなおしてください。</dd>
       <dt>指示文に出てくる、ファイルの保存やGitHubへの反映は、チャットでも使えますか？</dt>
-      <dd>それらは、プロジェクトのファイルやGitHubとの接続がある場合の話です。ない場合は、できる範囲で動き、そのほかは読みとばされます。つくったHTMLファイルは、ダウンロードして使ってください。</dd>
+      <dd>それらは、プロジェクトのファイルやGitHubとの接続がある場合の話です。ない場合は、できる範囲で動きます。つくったHTMLファイルは、ダウンロードして使ってください。</dd>
       <dt>指示文は書きかえてもいいですか？</dt>
       <dd>はい。自分のクラスや目的に合わせて、自由に書きかえて使ってください。</dd>
-      <dt>ダウンロードしたほうがいいですか？</dt>
-      <dd>コピーして貼りつけるだけで使えます。あとで見返したいときは「ダウンロード」でテキストファイルとして保存できます。</dd>
     </dl>
   </div>
 </main>
 
 <footer>
-  <p>つくったアプリは <a href="https://sorafjah.github.io/" target="_blank" rel="noopener">sorafjah.github.io</a> にもあります。</p>
+  <p>作ったアプリは <a href="https://sorafjah.github.io/iroiroai/" target="_blank" rel="noopener">https://sorafjah.github.io/iroiroai/</a> にもあります。</p>
 </footer>
 
 <script>
@@ -220,15 +234,6 @@
     });
   }
 
-  function download(filename, text) {
-    var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement("a");
-    a.href = url; a.download = filename;
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
-  }
-
   function el(tag, cls, text) {
     var e = document.createElement(tag);
     if (cls) e.className = cls;
@@ -250,39 +255,40 @@
     card.appendChild(el("h3", null, item.title));
     if (item.desc) card.appendChild(el("p", "desc", item.desc));
 
+    var toggleBtn = null;
+    if (ready) {
+      var pre = el("pre", "text", text.trim());
+      card.appendChild(pre);
+      toggleBtn = el("button", null, "全文を見る");
+      toggleBtn.type = "button";
+      toggleBtn.setAttribute("aria-expanded", "false");
+      toggleBtn.addEventListener("click", function () {
+        var open = pre.classList.toggle("open");
+        toggleBtn.textContent = open ? "とじる" : "全文を見る";
+        toggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
+        if (!open) pre.scrollTop = 0;
+      });
+    }
+
     var actions = el("div", "actions");
     var copyBtn = el("button", "primary", ready ? "コピーする" : "じゅんび中");
     copyBtn.type = "button";
-    var dlBtn = el("button", null, "ダウンロード");
-    dlBtn.type = "button";
-    if (!ready) { copyBtn.disabled = true; dlBtn.disabled = true; }
+    if (!ready) { copyBtn.disabled = true; }
     else {
       copyBtn.addEventListener("click", function () {
         copyText(text).then(function () {
           flash(copyBtn, "コピーしました ✓");
           announce(item.title + "の指示文をコピーしました");
         }).catch(function () {
-          alert("コピーできませんでした。「全文を見る」から文章を選んでコピーしてください。");
+          alert("コピーできませんでした。「全文を見る」をひらいて、文章を選んでコピーしてください。");
         });
-      });
-      dlBtn.addEventListener("click", function () {
-        download(item.file.replace(/^.*\//, ""), text);
-        announce(item.title + "の指示文をダウンロードしました");
       });
     }
     actions.appendChild(copyBtn);
-    actions.appendChild(dlBtn);
+    if (toggleBtn) actions.appendChild(toggleBtn);
     card.appendChild(actions);
 
-    if (ready) {
-      card.appendChild(el("div", "meta", text.length.toLocaleString("ja-JP") + "文字"));
-      var d = el("details");
-      d.appendChild(el("summary", null, "全文を見る"));
-      d.appendChild(el("pre", null, text));
-      card.appendChild(d);
-    } else {
-      card.appendChild(el("div", "meta", "もうすぐ公開します。"));
-    }
+    card.appendChild(el("div", "meta", ready ? text.length.toLocaleString("ja-JP") + "文字" : "もうすぐ公開します。"));
     return card;
   }
 
